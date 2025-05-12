@@ -1,0 +1,26 @@
+FROM ubuntu:24.04
+
+# Prevent interactive prompts during package installation
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Remove default user
+RUN userdel -r ubuntu
+
+# Install sudo and create test user
+RUN apt-get update && \
+    apt-get install -y sudo && \
+    rm -rf /var/lib/apt/lists/* && \
+    useradd -m -u 1000 -s /bin/bash testuser && \
+    echo "testuser ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/testuser && \
+    chmod 0440 /etc/sudoers.d/testuser
+
+# Copy the script into the container
+COPY install/packages.ubuntu-2404.sh /tmp/packages.ubuntu-2404.sh
+RUN chmod +x /tmp/packages.ubuntu-2404.sh
+
+# Switch to test user
+USER testuser
+WORKDIR /home/testuser
+
+# Run the script
+CMD ["/tmp/packages.ubuntu-2404.sh", "install"]

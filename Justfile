@@ -32,9 +32,11 @@ install-packages:
 symlink-config:
   @echo "Symlink config"
 
+test-integration-install:
+  @echo "Building and testing install script in Docker..."
+  docker build -t workbench-test -f tests/integration/install/Dockerfile.test .
+  docker run -it workbench-test
+  @echo "Test completed successfully!"
+
 # Test the packages script in a Docker container
-test-integration:
-    @echo "Building and testing packages script in Docker..."
-    docker build -t workbench-test -f Dockerfile.test .
-    docker run -it workbench-test
-    @echo "Test completed successfully!"
+test-integration: test-integration-install

@@ -87,6 +87,7 @@ Cargo.lock
 *.dll
 *.dylib
 *.test
+!Dockerfile.test
 *.out
 vendor/
 .go/
