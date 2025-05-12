@@ -1,0 +1,83 @@
+{
+    // Remote development settings
+    "remote.SSH.defaultForwardedPorts": [
+        {
+            "localPort": 3000,
+            "remotePort": 3000
+        }
+    ],
+
+    // Editor settings
+    "editor.formatOnSave": true,
+    "editor.rulers": [80, 100],
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": true,
+
+    // Language-specific settings
+    "[python]": {
+        "editor.tabSize": 4,
+        "editor.defaultFormatter": "charliermarsh.ruff"
+    },
+    "[go]": {
+        "editor.tabSize": 8,
+        "editor.insertSpaces": false,
+        "editor.defaultFormatter": "golang.go"
+    },
+    "[rust]": {
+        "editor.defaultFormatter": "rust-lang.rust-analyzer"
+    },
+
+    // Terminal settings
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "terminal.integrated.fontFamily": "MesloLGS NF",
+
+    // File settings
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+
+    // Search settings
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/*.code-search": true,
+        "**/target": true,
+        "**/.git": true
+    },
+
+    "telemetry.telemetryLevel": "off",
+
+    // Extensions to install locally
+    "defaultExtensions": [
+        "vscodevim.vim"
+    ],
+
+    // Remote development specific
+    "remote.SSH.remotePlatform": "linux",
+    "remote.SSH.showLoginTerminal": true,
+
+    // Extensions to install
+    "remote.SSH.defaultExtensions": [
+        // Core language support
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "charliermarsh.ruff",
+        "golang.go",
+        "rust-lang.rust-analyzer",
+
+        // Development tools
+        "ms-azuretools.vscode-docker",
+        "ms-kubernetes-tools.vscode-kubernetes-tools",
+        "redhat.vscode-yaml",
+
+        // Remote development
+        "ms-vscode-remote.remote-ssh",
+        "ms-vscode-remote.remote-ssh-edit",
+        "ms-vscode-remote.remote-containers",
+        "ms-vscode-remote.remote-wsl",
+
+        "github.copilot",
+        "github.copilot-chat"
+    ]
+}

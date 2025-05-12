@@ -1,0 +1,132 @@
+{
+    // Remote development settings
+    "remote.SSH.defaultForwardedPorts": [
+        {
+            "localPort": 3000,
+            "remotePort": 3000
+        }
+    ],
+
+    // Editor settings
+    "editor.formatOnSave": true,
+    "editor.rulers": [80, 100],
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": true,
+
+    // Language-specific settings
+    "[python]": {
+        "editor.tabSize": 4,
+        "editor.defaultFormatter": "charliermarsh.ruff"
+    },
+    "[go]": {
+        "editor.tabSize": 8,
+        "editor.insertSpaces": false,
+        "editor.defaultFormatter": "golang.go"
+    },
+    "[rust]": {
+        "editor.defaultFormatter": "rust-lang.rust-analyzer"
+    },
+
+    // Terminal settings
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "terminal.integrated.fontFamily": "MesloLGS NF",
+
+    // File settings
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+
+    // Search settings
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/*.code-search": true,
+        "**/target": true,
+        "**/.git": true
+    },
+
+    "telemetry.telemetryLevel": "off",
+
+    // Remote development specific
+    "remote.SSH.remotePlatform": "linux",
+    "remote.SSH.showLoginTerminal": true,
+
+    "defaultExtensions": [
+        "vscodevim.vim"
+    ],
+
+    // Cursor-specific settings
+    "cursor.remoteSSH.defaultExtensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "charliermarsh.ruff",
+        "golang.go",
+        "rust-lang.rust-analyzer",
+        "ms-azuretools.vscode-docker",
+        "ms-kubernetes-tools.vscode-kubernetes-tools"
+    ],
+
+    // Cursor AI settings
+    "cursor.ai.enabled": true,
+    "cursor.ai.defaultModel": "anthropic-claude-3-sonnet",
+    "cursor.ai.autoComplete": true,
+    "cursor.ai.chatEnabled": true,
+
+    // Cursor AI system prompts and rules
+    "cursor.ai.systemPrompts": {
+        "default": "You are a powerful AI coding assistant. Follow these rules:\n1. Write clear, readable code over clever one-liners\n2. Use descriptive variable names, avoid abbreviations\n3. Keep functions short and focused (under 50 lines)\n4. Prefer standard library solutions over external dependencies\n5. Make scripts idempotent where possible\n6. Use consistent formatting and indentation\n7. Always check return values of commands\n8. Provide helpful error messages with suggested fixes\n9. Clean up resources on failure\n10. Exit with meaningful status codes\n11. Handle edge cases explicitly",
+        "codeReview": "You are a thorough code reviewer. Focus on:\n1. Code quality and maintainability\n2. Security best practices\n3. Performance considerations\n4. Error handling and edge cases\n5. Documentation and comments\n6. Testing coverage\n7. Consistent style and formatting",
+        "documentation": "You are a documentation expert. Ensure:\n1. Clear and concise explanations\n2. Usage examples for all functions\n3. Parameter and return value documentation\n4. Edge cases and error conditions\n5. Code examples where relevant\n6. Consistent formatting and structure"
+    },
+
+    "cursor.ai.rules": {
+        "codeStyle": {
+            "maxLineLength": 100,
+            "indentStyle": "spaces",
+            "indentSize": 2,
+            "quoteStyle": "double",
+            "semicolons": true,
+            "trailingComma": "es5"
+        },
+        "documentation": {
+            "requireFunctionDocs": true,
+            "requireParamDocs": true,
+            "requireReturnDocs": true,
+            "requireExampleUsage": true
+        },
+        "testing": {
+            "requireTests": true,
+            "requireEdgeCases": true,
+            "requireErrorCases": true
+        },
+        "security": {
+            "noHardcodedSecrets": true,
+            "requireInputValidation": true,
+            "requireErrorHandling": true
+        }
+    },
+
+    "cursor.ai.contextRules": {
+        "includePatterns": [
+            "**/*.{js,ts,py,go,rs,sh}",
+            "**/*.{json,yaml,yml,toml}",
+            "**/*.{md,rst,txt}",
+            "**/Dockerfile",
+            "**/Makefile",
+            "**/Justfile"
+        ],
+        "excludePatterns": [
+            "**/node_modules/**",
+            "**/dist/**",
+            "**/build/**",
+            "**/.git/**",
+            "**/target/**",
+            "**/__pycache__/**",
+            "**/*.min.js",
+            "**/*.bundle.js"
+        ],
+        "maxFileSize": 1000000,  // 1MB
+        "maxFiles": 100
+    }
+}

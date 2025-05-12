@@ -1,0 +1,8 @@
+# Editor aliases
+alias vim='nvim'
+alias vi='nvim'
+alias vimdiff='nvim -d'
+
+# Search aliases
+alias ag='rg'
+alias grep='rg'
