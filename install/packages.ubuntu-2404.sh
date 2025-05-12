@@ -82,6 +82,7 @@ check_os() {
     fi
 
     # Source the os-release file
+    # shellcheck source=/dev/null
     . /etc/os-release
 
     if [[ "$ID" != "ubuntu" ]]; then
