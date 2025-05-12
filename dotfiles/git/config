@@ -1,0 +1,5 @@
+[alias]
+	ff = "merge --ff-only"
+
+[init]
+	defaultBranch = "main"

@@ -1,0 +1,48 @@
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+
+# Source bash and aliases
+if [ -e ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+if [ -e ~/.bash_env ]; then
+    . ~/.bash_env
+fi
+
+# Git branch in prompt
+__parse_git_branch() {
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
+__blue="\033[0;36m"
+__yellow="\033[0;33m"
+__nc="\033[0m"
+
+export PS1="\h:${__blue}\W${__nc}${__yellow}\$(__parse_git_branch) ${__nc}\$ "
+
+# History settings
+HISTSIZE=10000
+HISTFILESIZE=20000
+HISTCONTROL=ignoreboth:erasedups
+shopt -s histappend
+
+# Color support for ls
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# checkwinsize: Adjust window size after each command
+shopt -s checkwinsize
+# Enable ** to match files recursively in any subdirectory (e.g. ls **/*.txt matches all .txt files in current dir and subdirs)
+shopt -s globstar 2>/dev/null
+
+# Configure GPG TTY
+GPG_TTY="$(tty)"
+export GPG_TTY

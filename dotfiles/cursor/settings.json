@@ -1,0 +1,21 @@
+{
+    "window.commandCenter": true,
+    "extensions.allowed": {
+        "vscodevim.vim": true,
+
+        "ms-python.python": true,
+        "ms-python.vscode-pylance": true,
+        "ms-python.debugpy": true,
+        "charliermarsh.ruff": true,
+
+        "golang.go": true,
+
+        "rust-lang.rust-analyzer": true,
+
+        "ms-vscode-remote.remote-ssh": true,
+        "ms-vscode-remote.remote-ssh-edit": true,
+        "ms-vscode.remote-server": true,
+        "ms-vscode.remote-explorer": true,
+        "ms-vscode-remote.remote-containers": true
+    }
+}

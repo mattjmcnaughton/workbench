@@ -17,6 +17,17 @@ repos:
         name: Check for large files
         description: Prevents giant files from being committed
 
+-   repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.3.0
+    hooks:
+    -   id: ruff
+        name: ruff
+        description: Fast Python linter and formatter
+        args: [--fix]
+    -   id: ruff-format
+        name: ruff-format
+        description: Fast Python formatter
+
 -   repo: local
     hooks:
     -   id: shellcheck

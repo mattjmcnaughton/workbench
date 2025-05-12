@@ -34,12 +34,18 @@ symlink-config:
 
 test-integration-install:
   @echo "Building and testing install script in Docker..."
-  docker build -t workbench-test -f tests/integration/install/Dockerfile.test .
-  docker run -t workbench-test
-  @echo "Test completed successfully!"
+  docker build -t workbench-test-install -f tests/integration/install/Dockerfile.test .
+  docker run -t workbench-test-install
+  @echo "Install test completed successfully!"
 
-# Test the packages script in a Docker container
-test-integration: test-integration-install
+test-integration-dotfiles:
+  @echo "Building and testing dotfiles in Docker..."
+  docker build -t workbench-test-dotfiles -f tests/integration/dotfiles/Dockerfile.test .
+  docker run -t workbench-test-dotfiles
+  @echo "Dotfiles test completed successfully!"
+
+# Test the packages script and dotfiles in Docker containers
+test-integration: test-integration-install test-integration-dotfiles
 
 # Run all pre-commit checks
 lint:
