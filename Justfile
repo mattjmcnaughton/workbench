@@ -40,3 +40,8 @@ test-integration-install:
 
 # Test the packages script in a Docker container
 test-integration: test-integration-install
+
+# Run all pre-commit checks
+lint:
+    @echo "Running pre-commit checks..."
+    pre-commit run --all-files

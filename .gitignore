@@ -117,7 +117,6 @@ out/
 .local/state/nvim/
 
 # Tool specific
-.pre-commit-config.yaml
 .terraform/
 .vagrant/
 
