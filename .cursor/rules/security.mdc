@@ -1,0 +1,112 @@
+# Security Guidelines
+
+## Sensitive Data Handling
+
+- Never store secrets, credentials, or API keys in scripts
+- Always use environment variables for sensitive configuration
+- Use `.env.sample` files to document required variables
+- Never log sensitive information
+- Sanitize user inputs before using them
+
+## File Operations
+
+- Check file permissions before reading/writing
+- Use secure temporary files with `mktemp`
+- Clean up temporary files on exit
+- Validate file paths to prevent directory traversal
+- Use atomic operations when updating critical files
+
+## Script Security
+
+```bash
+# Secure defaults
+set -euo pipefail
+IFS=$'\n\t'
+
+# Validate input
+validate_path() {
+    local path="$1"
+    # Ensure path doesn't contain ..
+    if [[ "$path" =~ \.\. ]]; then
+        log_error "Invalid path: $path"
+        exit 1
+    fi
+}
+
+# Secure file creation
+create_secure_file() {
+    local file="$1"
+    touch "$file"
+    chmod 600 "$file"
+}
+
+# Environment variable validation
+require_env() {
+    local var="$1"
+    if [[ -z "${!var:-}" ]]; then
+        log_error "Required environment variable $var is not set"
+        exit 1
+    fi
+}
+```
+
+## Network Operations
+
+- Validate URLs before making requests
+- Use HTTPS whenever possible
+- Verify SSL certificates
+- Set reasonable timeouts for network operations
+- Don't expose internal network details in errors
+
+## Authentication & Authorization
+
+- Never store passwords in plain text
+- Use SSH keys instead of passwords when possible
+- Implement proper permission checks
+- Follow principle of least privilege
+- Rotate credentials regularly
+
+## Common Security Patterns
+
+### Safe command execution
+```bash
+# Good: Quote variables
+cmd "$user_input"
+
+# Bad: Unquoted variables can lead to injection
+cmd $user_input
+
+# Good: Validate before execution
+if [[ "$action" =~ ^(start|stop|restart)$ ]]; then
+    systemctl "$action" "$service"
+fi
+```
+
+### Secure defaults
+```bash
+# Set restrictive umask
+umask 077
+
+# Create files with limited permissions
+install -m 600 "$source" "$dest"
+```
+
+### Input sanitization
+```bash
+sanitize_input() {
+    local input="$1"
+    # Remove dangerous characters
+    echo "$input" | tr -cd '[:alnum:]._-'
+}
+```
+
+## Security Checklist
+
+- [ ] No hardcoded secrets or credentials
+- [ ] All user inputs are validated
+- [ ] File operations check permissions
+- [ ] Temporary files are handled securely
+- [ ] Network operations use HTTPS
+- [ ] Error messages don't leak sensitive info
+- [ ] Scripts fail securely (fail closed)
+- [ ] Dependencies are from trusted sources

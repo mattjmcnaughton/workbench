@@ -1,0 +1,24 @@
+# Toolbox Project Cursor Rules
+# Priority: Security, Simplicity, Clear Documentation
+
+This is a developer toolbox project containing development environment setup
+scripts, configuration files (dotfiles), and bootstrap utilities for new
+systems.
+
+## Core Principles
+
+1. **Security First**: Never store secrets or credentials. Always validate
+inputs. Use secure defaults.
+2. **Simplicity**: Write clear, readable code. Each component does one thing
+well.
+3. **Clear Documentation**: Every component is documented with examples and
+usage instructions.
+
+## Working Guidelines
+
+1. Understand existing patterns before making changes
+2. Prioritize security in all decisions
+3. Keep changes focused and minimal
+4. Update documentation alongside code
+5. Test changes on clean systems
+6. Consider backward compatibility

@@ -1,0 +1,94 @@
+# Shell Script Guidelines
+
+## Shell Script Template
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+
+# Brief description of what this script does
+# Usage: script-name.sh [options] <required-arg>
+#
+# Options:
+#   -h, --help     Show this help message
+#   -v, --verbose  Enable verbose output
+#
+# Environment variables:
+#   VAR_NAME       Description (default: value)
+
+# Logging functions
+log_info()  { echo "[INFO] $*"; }
+log_warn()  { echo "[WARN] $*" >&2; }
+log_error() { echo "[ERROR] $*" >&2; }
+
+# Error handling
+trap 'log_error "Script failed"; exit 1' ERR
+
+# Input validation
+if [[ $# -lt 1 ]]; then
+    log_error "Missing required argument"
+    exit 1
+fi
+
+# Main function
+main() {
+    local arg="$1"
+    # Implementation
+}
+
+main "$@"
+```
+
+## Best Practices
+
+- Always use `#!/usr/bin/env bash` for portability
+- Enable strict mode: `set -euo pipefail`
+- Set safe IFS: `IFS=$'\n\t'`
+- Use local variables in functions
+- Quote all variables: `"$var"` not `$var`
+- Use `[[ ]]` for conditionals instead of `[ ]`
+- Use `$(command)` instead of backticks
+- Check if commands exist before using them
+- Provide `--help` option for all scripts
+
+## Common Patterns
+
+### Checking prerequisites
+```bash
+command_exists() {
+    command -v "$1" >/dev/null 2>&1
+}
+
+require_command() {
+    if ! command_exists "$1"; then
+        log_error "$1 is required but not installed"
+        exit 1
+    fi
+}
+```
+
+### Safe temporary files
+```bash
+tmpfile=$(mktemp) || { log_error "Failed to create temp file"; exit 1; }
+trap 'rm -f "$tmpfile"' EXIT
+```
+
+### Parsing arguments
+```bash
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -h|--help)
+            show_help
+            exit 0
+            ;;
+        -v|--verbose)
+            VERBOSE=true
+            shift
+            ;;
+        *)
+            break
+            ;;
+    esac
+done
+```

@@ -1,0 +1,197 @@
+# Documentation Guidelines
+
+## Code Documentation
+
+### Script Headers
+Every script must have a descriptive header:
+
+```bash
+#!/usr/bin/env bash
+#
+# setup-tool.sh - Install and configure development tool
+#
+# This script installs the specified development tool and configures
+# it with sensible defaults for the development environment.
+#
+# Usage:
+#   setup-tool.sh [options] <tool-name>
+#
+# Options:
+#   -h, --help      Show this help message
+#   -v, --version   Tool version to install (default: latest)
+#   -f, --force     Force reinstall if already present
+#
+# Examples:
+#   setup-tool.sh neovim
+#   setup-tool.sh --version v0.9.0 neovim
+#   setup-tool.sh --force node
+#
+# Environment Variables:
+#   TOOL_PREFIX     Installation prefix (default: /usr/local)
+#   TOOL_CONFIG     Configuration directory (default: ~/.config)
+#
+# Exit Codes:
+#   0 - Success
+#   1 - General error
+#   2 - Invalid arguments
+#   3 - Installation failed
+#   4 - Configuration failed
+#
+```
+
+### Function Documentation
+```bash
+# Install the specified tool
+# Arguments:
+#   $1 - Tool name
+#   $2 - Version (optional, default: latest)
+# Returns:
+#   0 on success, non-zero on failure
+# Example:
+#   install_tool "neovim" "v0.9.0"
+install_tool() {
+    local tool="$1"
+    local version="${2:-latest}"
+    # Implementation
+}
+```
+
+### Inline Comments
+```bash
+# Use inline comments for non-obvious logic
+if [[ "${OSTYPE}" == "darwin"* ]]; then
+    # macOS requires different package manager
+    brew install "$package"
+else
+    # Assume Linux with apt
+    sudo apt install "$package"
+fi
+```
+
+## Configuration Files
+
+### Example Files
+Always provide example configuration files:
+
+```yaml
+# config.example.yaml
+# Example configuration file for tool setup
+#
+# Copy this file to config.yaml and modify as needed
+
+# Required settings
+tool_name: "example"
+version: "1.0.0"
+
+# Optional settings with defaults
+install_path: "/usr/local"  # Installation directory
+config_path: "~/.config"    # Configuration directory
+enable_plugins: true        # Enable plugin system
+```
+
+### Environment Files
+```bash
+# .env.example
+# Environment variables for toolbox setup
+#
+# Copy to .env and fill in your values
+
+# Required variables
+GITHUB_TOKEN=your_github_token_here
+EMAIL=your_email@example.com
+
+# Optional variables with defaults
+EDITOR=nvim
+SHELL=/bin/bash
+NODE_VERSION=20.0.0
+```
+
+## Project Documentation
+
+### README Structure
+```markdown
+# Project Name
+
+Brief description of what this project does.
+
+## Features
+
+- Feature 1: Description
+- Feature 2: Description
+- Feature 3: Description
+
+## Requirements
+
+- Bash 4.0+
+- Git 2.0+
+- curl or wget
+
+## Installation
+
+\```bash
+git clone https://github.com/user/toolbox.git
+cd toolbox
+./setup-dev-env.sh
+\```
+
+## Usage
+
+### Basic Usage
+\```bash
+./setup-dev-env.sh install
+\```
+
+### Advanced Usage
+\```bash
+# Custom configuration
+PYTHON_VERSION=3.11 ./setup-dev-env.sh install
+
+# Clean specific tool
+./setup-dev-env.sh clean nodejs
+\```
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+## License
+
+[LICENSE](LICENSE)
+```
+
+## Documentation Standards
+
+### Clarity
+- Use simple, clear language
+- Avoid jargon without explanation
+- Include examples for complex concepts
+- Structure content logically
+
+### Completeness
+- Document all public interfaces
+- Include prerequisite information
+- Provide troubleshooting guidance
+- List all configuration options
+
+### Maintenance
+- Keep documentation in sync with code
+- Update examples when behavior changes
+- Remove documentation for deprecated features
+- Version documentation with the code
+
+### User Guidance
+- Include common use cases
+- Provide step-by-step instructions
+- Add screenshots/diagrams where helpful
+- Link to additional resources
+
+## Documentation Checklist
+
+- [ ] All scripts have header comments
+- [ ] Functions are documented with purpose and usage
+- [ ] Complex logic has explanatory comments
+- [ ] Configuration files have examples
+- [ ] README is complete and up-to-date
+- [ ] Environment variables are documented
+- [ ] Error messages are helpful
+- [ ] Troubleshooting section exists

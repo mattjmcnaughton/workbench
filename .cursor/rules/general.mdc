@@ -1,0 +1,43 @@
+# General Development Guidelines
+
+## Code Style
+
+- Write clear, readable code over clever one-liners
+- Use descriptive variable names, avoid abbreviations
+- Keep functions short and focused (under 50 lines)
+- Prefer standard library solutions over external dependencies
+- Make scripts idempotent where possible
+- Use consistent formatting and indentation
+
+## Error Handling
+
+- Always check return values of commands
+- Provide helpful error messages with suggested fixes
+- Clean up resources on failure (use `trap` in shell scripts)
+- Exit with meaningful status codes
+- Handle edge cases explicitly
+
+## Version Control
+
+- Use conventional commits: `type(scope): description`
+- Keep commits focused and atomic
+- Write descriptive commit messages
+- Review your own code before committing
+
+## Anti-patterns to Avoid
+
+- Don't hardcode paths - use variables or discovery
+- Don't assume specific OS versions without checking
+- Don't mix concerns - separate setup from configuration
+- Don't ignore error conditions
+- Don't use deprecated commands or syntax
+- Don't store state in global variables
+- Don't assume commands exist - check first
+
+## Testing
+
+- Test scripts on fresh systems
+- Verify idempotency by running multiple times
+- Test both success and failure paths
+- Document tested platforms and distributions
+- Include edge case testing
