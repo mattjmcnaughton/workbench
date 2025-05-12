@@ -35,7 +35,7 @@ symlink-config:
 test-integration-install:
   @echo "Building and testing install script in Docker..."
   docker build -t workbench-test -f tests/integration/install/Dockerfile.test .
-  docker run -it workbench-test
+  docker run -t workbench-test
   @echo "Test completed successfully!"
 
 # Test the packages script in a Docker container
