@@ -1,0 +1,20 @@
+{
+    "runtime": {
+        "version": "LuaJIT"
+    },
+    "diagnostics": {
+        "globals": [
+            "vim"
+        ],
+        "disable": []
+    },
+    "workspace": {
+        "checkThirdParty": false,
+    },
+    "format": {
+        "enable": false
+    },
+    "telemetry": {
+        "enable": false
+    }
+}

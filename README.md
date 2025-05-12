@@ -1,45 +1,22 @@
-# workbench
+# Workbench
 
-A lightweight development environment management tool that combines dotfile management with a simple package management system.
+A collection of development tools and configurations to help streamline your development workflow.
 
-## Overview
+## Components
 
-Workbench serves two primary purposes:
+### Dotfiles Management
 
-1. **Dotfile Management**: Centralizes and manages your development tool configurations (dotfiles) across different machines, including:
-   - Neovim configuration
-   - Git configuration
-   - Tmux configuration
-   - Bash configuration (bashrc and aliases)
+A robust dotfiles management system that allows for easy configuration and
+deployment of development environment settings across different machines and
+contexts.
 
-2. **Development Package Management**: Provides a simple, script-based approach to managing development tools and dependencies, currently supporting:
-   - Ubuntu 24.04 LTS
-   - Core development tools (git, tmux, etc.)
-   - Language runtimes and tools:
-     - Node.js
-     - Go
-     - Python (via uv)
-     - Rust
-     - Lua
-   - Development tools:
-     - Neovim
-     - Language servers
-     - Build tools
-
-## Features
-
-### Dotfile Management
-- Centralized configuration management
-- Easy synchronization across machines
-- Simple symlink-based setup
-- Version controlled configurations
+For detailed documentation, see [dotfiles/README.md](dotfiles/README.md).
 
 ### Package Management
-- Lightweight bash-based installation
-- Idempotent installations (safe to run multiple times)
-- Configurable via environment variables
-- Supports both system and user-space installations
-- Automatic version management for key tools
+
+A lightweight, bash-based package management system for development tools and dependencies. Currently supports Ubuntu 24.04 LTS.
+
+For detailed documentation, see [install/README.md](install/README.md).
 
 ## Quick Start
 
@@ -62,8 +39,8 @@ Workbench serves two primary purposes:
 
 3. Set up dotfiles first (this ensures any package installations can use your custom configurations):
    ```bash
-   cd ~/.workbench
-   ./config/symlink-dotfiles.sh
+   cd dotfiles
+   ./symlink_manager.py
    ```
 
 4. Install packages (Ubuntu 24.04):
@@ -71,54 +48,9 @@ Workbench serves two primary purposes:
    ./install/packages.ubuntu-2404.sh
    ```
 
-5. Getting to work!
-
-    TODO: Document how to use w/ Cursor, Zed, VSCode, NeoVim (both local and remote).
-
-Note: It's important to set up dotfiles before installing packages because some package installations may depend on or use your custom configurations (like git config, bash aliases, etc.).
-
-## Configuration
-
-### Package Management
-Customize the installation by setting environment variables:
-```bash
-# Example customizations
-export NEOVIM_VERSION="v0.11.1"
-export NODE_VERSION="v22.15.0"
-export GO_VERSION="1.24.1"
-export PYTHON_VERSION="3.12"
-```
-
 ## Contributing
 
-We welcome contributions! Here's how to get started:
-
-### Development Setup
-
-1. Fork and clone the repository
-2. Make your changes
-3. Test your changes using our Docker-based test environment
-
-### Testing Changes
-
-We provide a Docker-based test environment to verify changes to the package installation script. This ensures that the script works correctly in a clean Ubuntu 24.04 environment.
-
-To test your changes:
-
-1. Build and run the test environment locally:
-   ```bash
-   just test-integration
-   ```
-
-This will:
-- Build a Docker container using `Dockerfile.test`
-- Create a non-root user with sudo privileges
-- Run the package installation script
-- Verify that all tools install correctly
-
-The test environment uses Ubuntu 24.04 and runs the script as a non-root user, simulating a real-world installation scenario.
-
-Note: All pull requests are automatically tested using GitHub Actions. The integration test runs on every PR to ensure changes work correctly in a clean environment. You can also manually trigger the test from the Actions tab in GitHub.
+Note: All pull requests are automatically tested using GitHub Actions. The integration test runs on every PR to ensure changes work correctly in a clean environment.
 
 ## License
 

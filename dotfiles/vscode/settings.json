@@ -1,0 +1,24 @@
+{
+    "telemetry.telemetryLevel": "off",
+    "extensions.allowed": {
+        "vscodevim.vim": true,
+
+        "GitHub.copilot": true,
+        "GitHub.copilot-chat": true,
+
+        "ms-python.python": true,
+        "ms-python.vscode-pylance": true,
+        "ms-python.debugpy": true,
+        "charliermarsh.ruff": true,
+
+        "golang.go": true,
+
+        "rust-lang.rust-analyzer": true,
+
+        "ms-vscode-remote.remote-ssh": true,
+        "ms-vscode-remote.remote-ssh-edit": true,
+        "ms-vscode.remote-server": true,
+        "ms-vscode.remote-explorer": true,
+        "ms-vscode-remote.remote-containers": true
+    }
+}
