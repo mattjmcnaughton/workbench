@@ -1,0 +1,5 @@
+awscli
+llm
+mypy
+ruff
+ty

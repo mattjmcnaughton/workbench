@@ -86,6 +86,10 @@ class DotfilesManager:
                 "source": self.dotfiles_dir / "bash_env",
                 "target": self.home_dir / ".bash_env",
             },
+            "npmrc": {
+                "source": self.dotfiles_dir / "npmrc",
+                "target": self.home_dir / ".npmrc",
+            },
             "git": {
                 "source": self.dotfiles_dir / "git" / "config",
                 "target": self.home_dir / ".git" / "config",

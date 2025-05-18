@@ -10,3 +10,8 @@ export LC_ALL='en_US.UTF-8'
 export TERM='xterm-256color'
 
 export OBSIDIAN_VAULT_DIR="$HOME/second-brain"
+
+export GOPATH="~/.gopath"
+export PATH="$PATH:~/.local/bin:~/.cargo/bin:$GOPATH/bin"
+
+export HOMEBREW_NO_ANALYTICS=1

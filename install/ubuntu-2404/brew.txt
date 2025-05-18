@@ -1,0 +1,9 @@
+go
+just
+kubectl
+lua-language-server
+neovim
+node
+sqlite
+tenv
+uv
