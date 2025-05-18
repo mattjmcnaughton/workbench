@@ -1,0 +1,11 @@
+---
+globs: '*.py'
+alwaysApply: true
+---
+# Python Script Guidelines
+
+- Follow PEP8 styleguidelines.
+- Unless otherwise directed, only use the Python standard library.
+- Make the python file executable as a standalone script.
+- Implement proper error handling and logging.
+- Break complex problems into smaller functions.

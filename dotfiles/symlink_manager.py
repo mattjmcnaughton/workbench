@@ -38,11 +38,20 @@ Environment Variables:
 """
 
 import argparse
+import logging
 import os
 import sys
 import platform
 from pathlib import Path
 from typing import List, Dict, Set
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="[%(levelname)s] %(message)s",
+    handlers=[logging.StreamHandler(sys.stdout)],
+)
+logger = logging.getLogger(__name__)
 
 
 def get_default_config_dir() -> Path:
@@ -54,10 +63,7 @@ def get_default_config_dir() -> Path:
         return Path.home() / ".config"
     else:
         # Default to .config for other platforms, but warn
-        print(
-            f"Warning: Unsupported platform {system}, defaulting to ~/.config",
-            file=sys.stderr,
-        )
+        logger.warning(f"Unsupported platform {system}, defaulting to ~/.config")
         return Path.home() / ".config"
 
 
@@ -168,7 +174,7 @@ class DotfilesManager:
     def _create_symlink(self, source: Path, target: Path) -> None:
         """Create a symlink from source to target, handling existing files."""
         if not source.exists():
-            print(f"Warning: Source {source} does not exist", file=sys.stderr)
+            logger.warning(f"Source {source} does not exist")
             return
 
         # Create parent directories if they don't exist
@@ -180,14 +186,14 @@ class DotfilesManager:
                 target.unlink()
             else:
                 backup = target.with_suffix(".backup")
-                print(f"Backing up existing {target} to {backup}")
+                logger.info(f"Backing up existing {target} to {backup}")
                 target.rename(backup)
 
         try:
             target.symlink_to(source)
-            print(f"Created symlink: {target} -> {source}")
+            logger.info(f"Created symlink: {target} -> {source}")
         except Exception as e:
-            print(f"Error creating symlink {target}: {e}", file=sys.stderr)
+            logger.error(f"Error creating symlink {target}: {e}")
 
 
 def main():
@@ -220,7 +226,7 @@ def main():
             parser.print_help()
             sys.exit(1)
     except ValueError as e:
-        print(f"Error: {e}", file=sys.stderr)
+        logger.error(f"Error: {e}")
         sys.exit(1)
 
 

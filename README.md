@@ -22,7 +22,7 @@ For detailed documentation, see [install/README.md](install/README.md).
 
 1. Bootstrap credentials (this sets up necessary authentication for the target machine):
    ```bash
-   just bootstrap-creds your-username@target-host
+   ./bootstrap/push_secrets.py $ARGS
    ```
    This step ensures you have the necessary credentials and SSH access to the target machine.
 
@@ -40,13 +40,13 @@ For detailed documentation, see [install/README.md](install/README.md).
 3. Set up dotfiles first (this ensures any package installations can use your custom configurations):
    ```bash
    cd dotfiles
-   ./symlink_manager.py
+   ./symlink_manager.py $ARGS
    ```
 
 4. Install packages
 
-- Install homebrew (needed on both Mac and Linux).
-- Run an install script based on OS (i.e. `install/ubuntu-2404/install.sh`).
+- Install homebrew (needed on both Mac and Linux) via instructions on [Homebrew](https://brew.sh/).
+- Run an install script based on OS (i.e. `install/ubuntu-2404/install.py`).
 
 ## Contributing
 

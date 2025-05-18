@@ -1,4 +1,5 @@
 ---
+globs: '*.sh'
 alwaysApply: true
 ---
 # Shell Script Guidelines

@@ -6,11 +6,14 @@ fd-find
 fzf
 gettext
 git
+gnupg
 gzip
+htop
 iputils-ping
+jq
 lsof
-luarocks
 ripgrep
+rsync
 rustup
 tar
 tmux
