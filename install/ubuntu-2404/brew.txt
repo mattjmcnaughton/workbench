@@ -1,9 +1,11 @@
+gh
 go
 just
 kubectl
 lua-language-server
 neovim
 node
+shellcheck
 sqlite
 tenv
 uv

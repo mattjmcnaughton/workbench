@@ -14,22 +14,24 @@ RUN useradd -m -u 1000 -s /bin/bash testuser && \
     echo "testuser ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/testuser && \
     chmod 0440 /etc/sudoers.d/testuser
 
-RUN apt install -y build-essential curl git
+RUN apt install -y build-essential curl git wget
 
 # Copy the script into the container
 COPY install/ubuntu-2404 /ubuntu-2404
-RUN chmod +x /ubuntu-2404/install.sh
+RUN chmod +x /ubuntu-2404/install.py
 
 # Switch to test user
 USER testuser
 WORKDIR /home/testuser
 
 # Install Homebrew
-RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+RUN wget https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+RUN chmod +x install.sh
+RUN bash install.sh
 # Some ... creative stuff to get the PATH right.
 ENV PATH=~/.local/bin:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-RUN brew install node
+RUN brew install python3 node
 RUN npm config set prefix ~/.local
 
 # Run the script
-CMD ["/ubuntu-2404/install.sh"]
+CMD ["/ubuntu-2404/install.py"]
