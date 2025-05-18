@@ -1,0 +1,35 @@
+FROM ubuntu:24.04
+
+# Prevent interactive prompts during package installation
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Remove default user
+RUN userdel -r ubuntu
+
+RUN apt update
+RUN apt install -y sudo
+
+# Install sudo and create test user
+RUN useradd -m -u 1000 -s /bin/bash testuser && \
+    echo "testuser ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/testuser && \
+    chmod 0440 /etc/sudoers.d/testuser
+
+RUN apt install -y build-essential curl git
+
+# Copy the script into the container
+COPY install/ubuntu-2404 /ubuntu-2404
+RUN chmod +x /ubuntu-2404/install.sh
+
+# Switch to test user
+USER testuser
+WORKDIR /home/testuser
+
+# Install Homebrew
+RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# Some ... creative stuff to get the PATH right.
+ENV PATH=~/.local/bin:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+RUN brew install node
+RUN npm config set prefix ~/.local
+
+# Run the script
+CMD ["/ubuntu-2404/install.sh"]

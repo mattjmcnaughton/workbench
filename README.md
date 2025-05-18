@@ -43,10 +43,10 @@ For detailed documentation, see [install/README.md](install/README.md).
    ./symlink_manager.py
    ```
 
-4. Install packages (Ubuntu 24.04):
-   ```bash
-   ./install/packages.ubuntu-2404.sh
-   ```
+4. Install packages
+
+- Install homebrew (needed on both Mac and Linux).
+- Run an install script based on OS (i.e. `install/ubuntu-2404/install.sh`).
 
 ## Contributing
 

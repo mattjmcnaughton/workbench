@@ -1,0 +1,2 @@
+pyright
+# TODO: Add commitlint, semantic-release, etc.
