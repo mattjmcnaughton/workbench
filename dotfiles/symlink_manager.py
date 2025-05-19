@@ -102,7 +102,7 @@ class DotfilesManager:
             },
             "tmux": {
                 "source": self.dotfiles_dir / "tmux" / "tmux.conf",
-                "target": self.home_dir / "tmux" / "tmux.conf",
+                "target": self.config_dir / "tmux" / "tmux.conf",
             },
             "nvim-plugins": {
                 "source": self.dotfiles_dir / "nvim-plugins",

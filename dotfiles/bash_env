@@ -2,6 +2,12 @@
 export EDITOR='nvim'
 export VISUAL='nvim'
 
+# Git
+export GIT_AUTHOR_NAME=mattjmcnaughton
+export GIT_AUTHOR_EMAIL=me@mattjmcnaughton
+export GIT_COMMITTER_NAME=mattjmcnaughton
+export GIT_COMMITTER_EMAIL=me@mattjmcnaughton
+
 # Language and locale
 export LANG='en_US.UTF-8'
 export LC_ALL='en_US.UTF-8'
