@@ -32,6 +32,11 @@ install-packages:
 symlink-config:
   @echo "Symlink config"
 
+test-integration-build:
+  @echo "Testing building docker image"
+  docker build -t workbench-test-build -f contrib/docker/full/Dockerfile .
+  @echo "Build completed successfully!"
+
 test-integration-install:
   @echo "Building and testing install script in Docker..."
   docker build -t workbench-test-install -f tests/integration/install/ubuntu-2404/Dockerfile.test .
@@ -45,7 +50,7 @@ test-integration-dotfiles:
   @echo "Dotfiles test completed successfully!"
 
 # Test the packages script and dotfiles in Docker containers
-test-integration: test-integration-install test-integration-dotfiles
+test-integration: test-integration-build test-integration-install test-integration-dotfiles
 
 # Run all pre-commit checks
 lint:
