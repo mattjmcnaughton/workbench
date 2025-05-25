@@ -9,3 +9,4 @@ shellcheck
 sqlite
 tenv
 uv
+duckdb
