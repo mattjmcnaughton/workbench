@@ -6,3 +6,6 @@ alias vimdiff='nvim -d'
 # Search aliases
 alias ag='rg'
 alias grep='rg'
+
+# Fabric
+alias fabric='fabric-ai'
