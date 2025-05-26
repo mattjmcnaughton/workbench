@@ -105,8 +105,14 @@ vim.lsp.config.lua_ls = {
   },
 }
 
+vim.lsp.config.rust_analyzer = {
+  cmd = { 'rust-analyzer' },
+  filetypes = { 'rust' },
+  root_markers = { 'Cargo.toml' },
+}
+
 -- Enable both language servers
-vim.lsp.enable({"ruff_lsp", "pyright", "gopls", "lua_ls" })
+vim.lsp.enable({"ruff_lsp", "pyright", "gopls", "lua_ls", "rust_analyzer"})
 
 -- Create an autocmd group for LSP-related autocmds
 local lsp_group = vim.api.nvim_create_augroup('lsp_config', { clear = true })
