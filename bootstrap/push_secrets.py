@@ -29,6 +29,7 @@ import argparse
 import logging
 import subprocess
 import sys
+import os
 from pathlib import Path
 from typing import List
 
@@ -40,9 +41,11 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+_XDG_CONFIG_HOME = os.getenv("XDG_CONFIG_HOME", str(Path.home() / ".config"))
+
 
 class SecretManager:
-    SECRET_TYPES = {"aws", "ssh", "gpg"}
+    SECRET_TYPES = {"aws", "ssh", "gpg", "fetch-creds"}
 
     # Mapping of secret types to their paths and permissions
     SECRET_CONFIGS = {
@@ -50,16 +53,25 @@ class SecretManager:
             "source": Path.home() / ".aws",
             "target": "~/.aws",
             "permissions": "chmod 600 ~/.aws/*",
+            "pre_transfer": None,
         },
         "ssh": {
             "source": Path.home() / ".ssh",
             "target": "~/.ssh",
             "permissions": "chmod 600 ~/.ssh/id_* && chmod 644 ~/.ssh/*.pub && chmod 600 ~/.ssh/known_hosts",
+            "pre_transfer": None,
         },
         "gpg": {
             "source": Path.home() / ".gnupg",
             "target": "~/.gnupg",
             "permissions": "chmod 700 ~/.gnupg && chmod 600 ~/.gnupg/*",
+            "pre_transfer": None,
+        },
+        "fetch-creds": {
+            "source": Path(_XDG_CONFIG_HOME) / "fetch-creds",
+            "target": "~/.config/fetch-creds",
+            "permissions": "chmod 700 ~/.config/fetch-creds && chmod 600 ~/.config/fetch-creds/*",
+            "pre_transfer": "mkdir -p ~/.config/fetch-creds",
         },
     }
 
@@ -94,6 +106,22 @@ class SecretManager:
                 continue
 
             logger.info(f"Transferring {type_} secrets from {source} to {target}...")
+
+            # Run pre-transfer command if specified
+            if config["pre_transfer"]:
+                try:
+                    logger.info(f"Running pre-transfer command for {type_}...")
+                    subprocess.run(
+                        ["ssh", self.target_host, config["pre_transfer"]],
+                        check=True,
+                        capture_output=True,
+                        text=True,
+                    )
+                except subprocess.CalledProcessError as e:
+                    logger.error(
+                        f"Error running pre-transfer command for {type_}: {e.stderr}"
+                    )
+                    continue
 
             # Use rsync to transfer files
             try:

@@ -3,3 +3,5 @@ llm
 mypy
 ruff
 ty
+
+git+ssh://git@github.com/mattjmcnaughton/fetch-creds.git

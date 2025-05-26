@@ -34,18 +34,18 @@ symlink-config:
 
 test-integration-build:
   @echo "Testing building docker image"
-  docker build -t workbench-test-build -f contrib/docker/full/Dockerfile .
+  docker build --no-cache -t workbench-test-build -f contrib/docker/full/Dockerfile .
   @echo "Build completed successfully!"
 
 test-integration-install:
   @echo "Building and testing install script in Docker..."
-  docker build -t workbench-test-install -f tests/integration/install/ubuntu-2404/Dockerfile.test .
+  docker build --no-cache -t workbench-test-install -f tests/integration/install/ubuntu-2404/Dockerfile.test .
   docker run -t workbench-test-install
   @echo "Install test completed successfully!"
 
 test-integration-dotfiles:
   @echo "Building and testing dotfiles in Docker..."
-  docker build -t workbench-test-dotfiles -f tests/integration/dotfiles/Dockerfile.test .
+  docker build --no-cache -t workbench-test-dotfiles -f tests/integration/dotfiles/Dockerfile.test .
   docker run -t workbench-test-dotfiles
   @echo "Dotfiles test completed successfully!"
 

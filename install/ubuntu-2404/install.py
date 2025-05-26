@@ -156,12 +156,16 @@ def install_python_tools() -> None:
     """Install Python tools using uv."""
     script_dir = Path(__file__).parent
     tools_file = script_dir / "uv-tool.txt"
+    ssh_dir = Path.home() / ".ssh"
 
     logger.info("Starting Python tool installation via uv...")
     tools = read_packages(str(tools_file))
     if tools:
         logger.info(f"Installing {len(tools)} Python tools:")
         for tool in tools:
+            if tool.startswith("git+ssh://") and not ssh_dir.exists():
+                logger.warning(f"Skipping {tool} as ~/.ssh directory does not exist")
+                continue
             run_command(["uv", "tool", "install", tool])
     else:
         logger.warning("No Python tools found to install")
