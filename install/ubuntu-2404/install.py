@@ -122,6 +122,21 @@ def install_rust() -> None:
     logger.info("Rust toolchain installation complete")
 
 
+def install_rustup_components() -> None:
+    """Install Rustup components"""
+    script_dir = Path(__file__).parent
+    component_file = script_dir / "rustup-component.txt"
+
+    logger.info("Starting Rustup component installation...")
+    components = read_packages(str(component_file))
+    if components:
+        logger.info(f"Installing {len(components)} Rustup components:")
+        for component in components:
+            run_command(["rustup", "component", "add", component])
+    else:
+        logger.warning("No rustup components to install")
+
+
 def install_python() -> None:
     """Install Python versions using uv."""
     script_dir = Path(__file__).parent
@@ -197,6 +212,7 @@ This script sets up a development environment on Ubuntu 24.04 by installing:
     install_apt_packages()
     install_homebrew()
     install_rust()
+    install_rustup_components()
     install_python()
     install_python_tools()
     install_npx()
