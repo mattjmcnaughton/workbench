@@ -11,6 +11,12 @@
         "ms-python.debugpy": true,
         "charliermarsh.ruff": true,
 
+        "ms-toolsai.jupyter": true,
+        "ms-toolsai.jupyter-keymap": true,
+        "ms-toolsai.vscode-jupyter-slideshow": true,
+        "ms-toolsai.vscode-jupyter-cell-tags": true,
+        "ms-toolsai.jupyter-renderers": true,
+
         "golang.go": true,
 
         "rust-lang.rust-analyzer": true,
