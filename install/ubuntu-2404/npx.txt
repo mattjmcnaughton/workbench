@@ -1,2 +1,6 @@
 pyright
+
+@anthropic-ai/claude-code
+@openai/codex
+@google/gemini-cli
 # TODO: Add commitlint, semantic-release, etc.
