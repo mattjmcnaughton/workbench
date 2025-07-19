@@ -96,6 +96,21 @@ def install_apt_packages() -> None:
         logger.warning("No apt packages found to install")
 
 
+def install_brew_taps() -> None:
+    """Add Homebrew taps."""
+    script_dir = Path(__file__).parent
+    tap_file = script_dir / "brew-tap.txt"
+
+    logger.info("Starting Homebrew tap installation...")
+    taps = read_packages(str(tap_file))
+    if taps:
+        logger.info(f"Adding {len(taps)} Homebrew taps:")
+        for tap in taps:
+            run_command(["brew", "tap", tap])
+    else:
+        logger.warning("No Homebrew taps found to add")
+
+
 def install_homebrew() -> None:
     """Install Homebrew packages."""
     script_dir = Path(__file__).parent
@@ -214,6 +229,7 @@ This script sets up a development environment on Ubuntu 24.04 by installing:
     # Run installations
     logger.info("Beginning package installations...")
     install_apt_packages()
+    install_brew_taps()
     install_homebrew()
     install_rust()
     install_rustup_components()

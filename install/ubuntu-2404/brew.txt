@@ -11,3 +11,5 @@ shellcheck
 sqlite
 tenv
 uv
+
+oven-sh/bun/bun
