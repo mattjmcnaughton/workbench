@@ -1,3 +1,4 @@
+duckdb
 gh
 go
 just
@@ -5,8 +6,8 @@ kubectl
 lua-language-server
 neovim
 node
+pnpm
 shellcheck
 sqlite
 tenv
 uv
-duckdb
