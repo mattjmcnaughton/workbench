@@ -9,3 +9,6 @@ alias grep='rg'
 
 # Fabric
 alias fabric='fabric-ai'
+
+# Gemini
+alias gemini='gemini --no-telemetry'
